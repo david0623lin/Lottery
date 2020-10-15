@@ -48,4 +48,18 @@ class Result extends Model
 
         return $last_num;
     }
+
+    public static function getResults($params)
+    {
+        $query = self::where(function($query) use ($params){
+            $query->where('game', $params['game']);
+            $query->where('date', $params['date']);
+            ($params['num'] != '') and $query->where('num', $params['num']);
+        });
+
+        $query->orderBy('num', 'desc');
+        $results = $query->get()->toArray();
+
+        return $results;
+    }
 }
