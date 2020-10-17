@@ -9,12 +9,17 @@ use App\Models\Result;
 class ParserResults extends Command
 {
     protected $signature = 'parser:results {game_type?}{search_date?}';
-    protected $description = 'Command description';
+    protected $description = '賽果擷取';
 
     public function handle()
     {
         $game_type = $this->argument('game_type');
-        $search_date = $this->argument('search_date', date('Y-m-d'));
+        $search_date = $this->argument('search_date');
+
+        if (empty($search_date)){
+            $search_date = date('Y-m-d');
+        }
+
         $rets = array();
 
         switch ($game_type){
