@@ -17,7 +17,7 @@ class Result extends Model
             exit;
         }
 
-        $last_num = self::getLastNum($game_type);
+        $last_num = self::getLastNum($game_type, $search_date);
 
         foreach ($rets as $num => $all_result){
             if ($num <= $last_num){
@@ -37,10 +37,11 @@ class Result extends Model
         }
     }
 
-    public static function getLastNum($game_type)
+    public static function getLastNum($game_type, $search_date)
     {
         $ret = self::select('num')->
             where('game', $game_type)->
+            where('date', $search_date)->
             orderBy('num', 'desc')->
             get()->toArray();
         
@@ -61,5 +62,17 @@ class Result extends Model
         $results = $query->get()->toArray();
 
         return $results;
+    }
+
+    public static function getResultCount($params)
+    {
+        $query = self::where(function($query) use ($params){
+            $query->where('game', $params['game']);
+            $query->where('date', $params['date']);
+        });
+
+        $count = $query->count();
+
+        return $count;
     }
 }

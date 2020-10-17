@@ -47,6 +47,9 @@ class GameStatisticsController extends Controller
             case 'five_elements_wood':
                 $statistics = self::five_elements_wood($result);
             break;
+            case 'five_elements_water':
+                $statistics = self::five_elements_water($result);
+            break;
             case 'five_elements_fire':
                 $statistics = self::five_elements_fire($result);
             break;
@@ -193,6 +196,49 @@ class GameStatisticsController extends Controller
                         }
                     break;
                     case '木':
+                        $statistics[] = explode(',', $value_str);
+                        $statistics[] = array($value['five_elements']);
+                        $value_str = '';
+                    break;
+                    default:
+                }
+            }
+        }
+
+        return $statistics;
+    }
+
+    public static function five_elements_water($result)
+    {
+        $value_str = '';
+
+        foreach($result as $key => $value){
+            if ($value_str == ''){
+                switch ($value['five_elements']){
+                    case '金':
+                    case '木':
+                    case '火':
+                    case '土':
+                        $value_str = $value['five_elements'];
+                    break;
+                    case '水':
+                        $statistics[] = array($value['five_elements']);
+                    break;
+                    default:
+                }
+            } else {
+                switch ($value['five_elements']){
+                    case '金':
+                    case '木':
+                    case '火':
+                    case '土':
+                        $value_str = $value_str. ','. $value['five_elements'];
+
+                        if ($key == (count($result) - 1)){
+                            $statistics[] = explode(',', $value_str);
+                        }
+                    break;
+                    case '水':
                         $statistics[] = explode(',', $value_str);
                         $statistics[] = array($value['five_elements']);
                         $value_str = '';
