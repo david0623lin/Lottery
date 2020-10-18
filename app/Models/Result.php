@@ -50,7 +50,7 @@ class Result extends Model
         return $last_num;
     }
 
-    public static function getResults($params)
+    public static function getResults($params, $orderby = 'desc')
     {
         $query = self::where(function($query) use ($params){
             $query->where('game', $params['game']);
@@ -58,7 +58,7 @@ class Result extends Model
             ($params['num'] != '') and $query->where('num', $params['num']);
         });
 
-        $query->orderBy('num', 'desc');
+        $query->orderBy('num', $orderby);
         $results = $query->get()->toArray();
 
         return $results;
