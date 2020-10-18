@@ -13,6 +13,12 @@
 					<li><a class="dropdown-item" href="{{action('GameDistributController@run')}}">開獎分佈</a></li>
 				</ul>
 			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">注單管理 </a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a class="dropdown-item" href="{{action('GameOrderController@run')}}">模擬下注</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div> <!-- navbar-collapse.// -->
 </nav>

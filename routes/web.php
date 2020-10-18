@@ -14,3 +14,4 @@
 Route::get('/game/history', 'GameHistoryController@run');
 Route::get('/game/statistics', 'GameStatisticsController@run');
 Route::get('/game/distribut', 'GameDistributController@run');
+Route::get('/game/order', 'GameOrderController@run');
